@@ -1,13 +1,15 @@
 using System;
+using System.Collections.Generic;
 
-namespace Dealership {
-
-  class Car
+namespace CarDealership.Models
+{
+public class Car
   {
     private string MakeModel;
     private int Price;
     private int Miles;
     private string Message;
+    private static List<Car> _instances = new List<Car> {};
 
     public Car(string makeModel, int price, int miles, string message)
     {
@@ -15,6 +17,7 @@ namespace Dealership {
       Price = price;
       Miles = miles;
       Message = message;
+      _instances.Add(this);
     }
 
     public void SetPrice(int newPrice)
@@ -25,6 +28,10 @@ namespace Dealership {
     public string GetMakeModel()
     {
       return MakeModel;
+    }
+    public void SetMakeModel(string newMakeModel)
+    {
+      MakeModel = newMakeModel;
     }
     public int GetPrice()
     {
@@ -46,6 +53,16 @@ namespace Dealership {
     public bool MilesCheck(int maxMiles)
     {
       return (Miles < maxMiles);
+    }
+
+    public static List<Car> GetAll()
+    {
+      return _instances;
+    }
+
+    public static void ClearAll()
+    {
+      _instances.Clear();
     }
   }
 
